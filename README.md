@@ -67,7 +67,7 @@ python -m multi_agent_user_story_development.orchestrator \
 
 **What Happens:**
 1. Business Analyst retrieves US:<user_story_id>, analyzes requirements
-2. Queries schemas for silver CMS tables and gold target
+2. Queries schemas for silver <DATA_SOURCE_NAME> tables and gold target
 3. Generates technical spec with column mappings and transformations
 4. PySpark Engineer creates new Python file with ETL class
 5. Memory system stores context for future enhancements
@@ -84,7 +84,7 @@ python -m multi_agent_user_story_development.orchestrator \
 ```
 
 **What Happens:**
-1. PySpark Engineer reads existing `s_cms_case.py`
+1. PySpark Engineer reads existing `s_<datasource>_case.py`
 2. Identifies existing functions and US references
 3. Adds new transformation functions alongside existing code
 4. Updates `transform()` method to chain new logic
@@ -92,7 +92,7 @@ python -m multi_agent_user_story_development.orchestrator \
 
 ### Scenario 3: Cross-System Linkage Table
 ```bash
-# Create linkage between CMS and FVMS systems
+# Create linkage between <DATA_SOURCE_1> and <DATA_SOURCE_2> systems
 python -m multi_agent_user_story_development.orchestrator \
   --user-story <user_story_id> \
   --file-name <insert_file_name> \
@@ -332,25 +332,25 @@ python -m multi_agent_user_story_development.orchestrator \
 
 After successful execution, you'll find:
 
-**Documentation** (`.claude/documentation/g_xa_mg_cms_mo_implementation_specs.md`):
+**Documentation** (`.claude/documentation/g_xa_mg_<datasource>_mo_implementation_specs.md`):
 - Executive summary of requirements
 - Schema mappings (source → target)
 - Transformation specifications
 - Testing scenarios
 
-**Python Code** (`python_files/gold/g_xa_mg_cms_mo.py`):
+**Python Code** (`python_files/gold/g_xa_mg_<datasource>_mo.py`):
 - Complete ETL class with extract/transform/load
 - Transformation functions with US references
 - Type hints and error handlers
 - Follows project coding standards
 
-**Memory** (`.claude/memory/gold/cms/mg_cms_mo.md`):
+**Memory** (`.claude/memory/gold/<datasource>/mg_<datasource>_mo.md`):
 - Consolidated table context
 - Changelog of user stories
 - Business rules and transformations
 - Related tables and gotchas
 
-**History Snapshot** (`.claude/memory/gold/cms/mg_cms_mo/history/US_<user_story_id>.md`):
+**History Snapshot** (`.claude/memory/gold/<datasource>/mg_<datasource>_mo/history/US_<user_story_id>.md`):
 - Point-in-time snapshot before this user story
 - Useful for understanding requirement evolution
 
@@ -388,7 +388,7 @@ from multi_agent_user_story_development.config import AgentConfig
 config = AgentConfig()
 # Access configured paths
 doc_path = config.get_documentation_path("my_table")
-memory_path = config.get_memory_path("gold", "cms", "mg_case")
+memory_path = config.get_memory_path("gold", "<datasource>", "mg_table")
 ```
 
 **Key Paths:**
@@ -506,7 +506,7 @@ config = AgentConfig()
 # Run orchestrator programmatically
 exit_code = run_orchestrator(
     user_story="44687",
-    file_name="g_xa_mg_cms_mo",
+    file_name="g_xa_mg_<datasource>_mo",
     read_layer="silver",
     write_layer="gold",
     skip_auth=False,
@@ -550,10 +550,10 @@ python -m multi_agent_user_story_development.orchestrator \
   --skip-business-analyst
 
 # Step 2: Review changes (new functions added)
-git diff python_files/silver/s_cms_case.py
+git diff python_files/silver/s_<datasource>_case.py
 
 # Step 3: Check memory update
-cat .claude/memory/silver/cms/cms_case.md
+cat .claude/memory/silver/<datasource>/<datasource>_table_name.md
 ```
 
 #### Workflow 3: Cross-System Linkage
@@ -586,13 +586,13 @@ for mem in gold_memories:
     print(f"Table: {mem.stem}, Path: {mem}")
 
 # Read specific table memory
-memory_path = config.get_memory_path("gold", "cms", "mg_case")
+memory_path = config.get_memory_path("gold", "<datasource>", "mg_table")
 if memory_path.exists():
     content = memory_path.read_text()
     print(content)
 
 # List memory history for a table
-history = config.list_memory_history(layer="gold", datasource="cms", table_name="mg_case")
+history = config.list_memory_history(layer="gold", datasource="<datasource>", table_name="mg_table")
 for hist in history:
     print(f"User Story: {hist.stem}, Path: {hist}")
 ```
@@ -603,7 +603,7 @@ import subprocess
 
 user_stories = [
     {"us": "45001", "file": "g_mg_incident_summary", "read": "silver", "write": "gold"},
-    {"us": "45002", "file": "g_mg_case_summary", "read": "silver", "write": "gold"},
+    {"us": "45002", "file": "g_mg_table_summary", "read": "silver", "write": "gold"},
     {"us": "45003", "file": "g_mg_occurrence_stats", "read": "silver", "write": "gold"},
 ]
 
@@ -712,17 +712,17 @@ for story in user_stories:
 ```
 .claude/memory/
 ├── gold/
-│   ├── cms/
-│   │   ├── mg_case.md                    # Current consolidated state
-│   │   └── mg_case/
+│   ├── <datasource>/
+│   │   ├── mg_table.md                    # Current consolidated state
+│   │   └── mg_table/
 │   │       └── history/
 │   │           ├── US_<user_story_id>.md           # Snapshot before US:<user_story_id>
 │   │           └── US_<user_story_id>.md           # Snapshot before US:<user_story_id>
-│   └── fvms/
+│   └── <datasource2>/
 │       └── incident.md
 └── silver/
-    └── cms/
-        └── cms_case.md
+    └── <datasource>/
+        └── <datasource>_table_name.md
 ```
 
 ### Configuration (`config.py`)
@@ -956,20 +956,20 @@ python -m multi_agent_user_story_development.orchestrator \
 
 #### Issue: Memory File Not Found
 ```
-Error: No memory found for table mg_case
+Error: No memory found for table mg_table
 ```
 
 **Solution:**
 This is normal for first-time runs. Memory will be created automatically. If memory should exist:
 ```bash
 # Check memory directory structure
-ls -la .claude/memory/gold/cms/
+ls -la .claude/memory/gold/<datasource>/
 
 # List all memories
 python -c "
 from multi_agent_user_story_development.config import AgentConfig
 config = AgentConfig()
-memories = config.list_memories(layer='gold', datasource='cms')
+memories = config.list_memories(layer='gold', datasource='<datasource>')
 for m in memories: print(m)
 "
 ```
