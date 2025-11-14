@@ -1,0 +1,436 @@
+{
+  "name": "multi-agent-user-story-development",
+  "version": "1.0.0",
+  "description": "Automated multi-agent orchestration system for generating PySpark ETL code from Azure DevOps user stories. Coordinates Business Analyst and PySpark Engineer agents with memory persistence, dual schema validation, and Azure integration.",
+  "author": {
+    "name": "Linus McMananey",
+    "email": "linus.mcmanamey@gmail.com",
+    "url": "https://github.com/linus-mcmanamey"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/linus-mcmanamey/multi-agent-user-story-development",
+  "repository": "https://github.com/linus-mcmanamey/multi-agent-user-story-development.git",
+  "keywords": [
+    "multi-agent",
+    "orchestration",
+    "user-story",
+    "pyspark",
+    "etl",
+    "azure-devops",
+    "code-generation",
+    "business-analyst",
+    "automation",
+    "mcp",
+    "memory-management",
+    "schema-validation"
+  ],
+  "category": "code-generation",
+  "tags": ["automation", "multi-agent", "etl", "pyspark", "azure"],
+  "skills": "./.claude/skills",
+  "hooks": "./.claude/hooks",
+  "capabilities": {
+    "skills": 10,
+    "hooks": 6,
+    "agents": 2,
+    "mcp_tools": 5
+  },
+  "engines": {
+    "claude-code": ">=1.0.0",
+    "python": ">=3.10"
+  },
+  "requirements": {
+    "claude_code": ">=1.0.0",
+    "python": ">=3.10",
+    "claude_cli": ">=1.0.0",
+    "pyspark": ">=3.4.0"
+  },
+  "features": {
+    "multi_agent_orchestration": {
+      "enabled": true,
+      "description": "Sequential execution of Business Analyst and PySpark Engineer agents",
+      "agents": ["Business Analyst", "PySpark Engineer"],
+      "execution_pattern": "sequential",
+      "non_interactive": true
+    },
+    "business_analyst_agent": {
+      "enabled": true,
+      "description": "Analyzes Azure DevOps user stories and creates technical specifications",
+      "capabilities": [
+        "user_story_retrieval",
+        "parent_story_analysis",
+        "comment_extraction",
+        "schema_validation",
+        "data_dictionary_reference",
+        "implementation_planning"
+      ],
+      "output": "Technical specification document with transformation logic"
+    },
+    "pyspark_engineer_agent": {
+      "enabled": true,
+      "description": "Generates production-ready PySpark ETL code from specifications",
+      "capabilities": [
+        "code_generation",
+        "schema_validation",
+        "australian_english_enforcement",
+        "quality_gates",
+        "existing_code_integration"
+      ],
+      "output": "Python file with PySpark transformations",
+      "coding_standards": {
+        "line_length": 240,
+        "type_hints": "mandatory",
+        "decorators": ["@synapse_error_print_handler"],
+        "spelling": "australian"
+      }
+    },
+    "memory_management": {
+      "enabled": true,
+      "description": "Persistent context across user stories with smart merge logic",
+      "features": [
+        "current_state_tracking",
+        "historical_snapshots",
+        "changelog_management",
+        "section_merging",
+        "cross_story_context"
+      ],
+      "storage": "File-based with history archiving"
+    },
+    "dual_schema_validation": {
+      "enabled": true,
+      "description": "Validates against both data dictionary and DuckDB implementation",
+      "sources": [
+        "Data dictionary markdown files (business context)",
+        "DuckDB schema database (implementation)"
+      ],
+      "features": [
+        "schema_drift_detection",
+        "foreign_key_discovery",
+        "null_constraint_validation",
+        "type_comparison"
+      ]
+    },
+    "azure_devops_integration": {
+      "enabled": true,
+      "description": "Deep integration with Azure DevOps work items",
+      "capabilities": [
+        "work_item_retrieval",
+        "parent_story_traversal",
+        "comment_analysis",
+        "technical_decision_extraction"
+      ],
+      "mcp_integration": true,
+      "mcp_server": "@azure-devops/mcp"
+    },
+    "mcp_server": {
+      "enabled": true,
+      "description": "Custom MCP server for memory and template management",
+      "server_name": "ba_pyspark_memory",
+      "tools": [
+        "read_etl_template",
+        "read_business_analysis",
+        "write_memory",
+        "read_memory",
+        "list_memories"
+      ],
+      "cli_entrypoint": "multi-agent-mcp"
+    },
+    "data_dictionary": {
+      "enabled": true,
+      "description": "Comprehensive schema documentation with business rules",
+      "tables": 69,
+      "sources": {
+        "cms": 43,
+        "fvms": 26
+      },
+      "format": "Markdown with schema, keys, and business logic",
+      "location": ".claude/memory/data_dictionary/"
+    },
+    "quality_gates": {
+      "enabled": true,
+      "description": "Automated validation of generated code",
+      "checks": [
+        "python_syntax_validation",
+        "australian_english_spelling",
+        "type_hint_coverage",
+        "decorator_usage",
+        "line_length_compliance"
+      ]
+    },
+    "intelligent_hooks": {
+      "enabled": true,
+      "description": "Automatic skill activation and orchestration routing",
+      "hooks": [
+        "combined-prompt-hook.sh",
+        "orchestrator_interceptor.py",
+        "skill-activation-prompt.sh",
+        "skill-activation-prompt.ts"
+      ],
+      "automatic_routing": true
+    }
+  },
+  "configuration": {
+    "workflow": "User Story → BA Analysis → PySpark Implementation",
+    "agent_timeout": {
+      "business_analyst": "1200s (20 minutes)",
+      "pyspark_engineer": "1800s (30 minutes)"
+    },
+    "memory_structure": {
+      "current": ".claude/memory/{layer}/{datasource}/{table}.md",
+      "history": ".claude/memory/{layer}/{datasource}/{table}/history/US_{story_id}.md"
+    },
+    "coding_standards": {
+      "line_length": 240,
+      "type_hints": "mandatory",
+      "blank_lines_in_functions": false,
+      "spelling": "australian",
+      "logging": "NotebookLogger (not print)"
+    },
+    "environment_variables": {
+      "required": [
+        "AZURE_DEVOPS_PAT",
+        "AZURE_DEVOPS_ORGANIZATION",
+        "AZURE_DEVOPS_PROJECT"
+      ],
+      "optional": [
+        "AGENT_DATA_ROOT",
+        "AGENT_PROJECT_ROOT",
+        "MOTHERDUCK_TOKEN"
+      ]
+    }
+  },
+  "documentation": {
+    "readme": "README.md",
+    "installation": "README.md#installation",
+    "quick_start": "README.md#quick-start",
+    "configuration": "README.md#configuration",
+    "usage": "README.md#usage",
+    "architecture": "README.md#architecture",
+    "troubleshooting": "README.md#troubleshooting",
+    "hook_reference": ".claude/hooks/README.md",
+    "skill_reference": ".claude/skills/README.md",
+    "test_guide": "tests/README.md"
+  },
+  "metadata": {
+    "plugin_type": "code-generation-automation",
+    "target_audience": [
+      "data-engineers",
+      "pyspark-developers",
+      "azure-engineers",
+      "etl-developers"
+    ],
+    "complexity_level": "intermediate-to-advanced",
+    "installation_time": "5-10 minutes",
+    "learning_curve": "moderate",
+    "use_cases": [
+      "Automated ETL code generation from user stories",
+      "PySpark transformation development",
+      "Medallion architecture implementation",
+      "Multi-agent workflow orchestration",
+      "Technical specification generation"
+    ]
+  },
+  "integrations": {
+    "azure_services": [
+      "Azure DevOps",
+      "Azure Synapse Analytics",
+      "Azure Key Vault",
+      "Azure Storage"
+    ],
+    "mcp_servers": [
+      "@azure-devops/mcp",
+      "mcp-server-motherduck",
+      "Ref.tools (optional)"
+    ],
+    "external_tools": [
+      "DuckDB",
+      "Claude CLI",
+      "Git",
+      "Python 3.10+"
+    ],
+    "databases": [
+      "DuckDB (schema queries)",
+      "Azure Synapse (target)"
+    ]
+  },
+  "components_detail": {
+    "skills": {
+      "count": 10,
+      "list": [
+        "azure-devops",
+        "mcp-code-execution",
+        "multi-agent-orchestration",
+        "project-architecture",
+        "project-commands",
+        "pyspark-patterns",
+        "schema-reference",
+        "skill-creator",
+        "wiki-auto-documenter",
+        "auto-code-review-gate"
+      ],
+      "categories": {
+        "integration": ["azure-devops", "mcp-code-execution"],
+        "orchestration": ["multi-agent-orchestration"],
+        "development": ["pyspark-patterns", "schema-reference"],
+        "documentation": ["project-architecture", "project-commands", "wiki-auto-documenter"],
+        "utilities": ["skill-creator", "auto-code-review-gate"]
+      }
+    },
+    "hooks": {
+      "count": 6,
+      "list": [
+        "combined-prompt-hook.sh",
+        "orchestrator_interceptor.py",
+        "skill-activation-prompt.sh",
+        "skill-activation-prompt.ts",
+        "package.json",
+        "README.md"
+      ],
+      "types": {
+        "routing": ["orchestrator_interceptor.py", "combined-prompt-hook.sh"],
+        "skill_management": ["skill-activation-prompt.sh", "skill-activation-prompt.ts"]
+      }
+    },
+    "agents": {
+      "count": 2,
+      "list": [
+        {
+          "name": "Business Analyst",
+          "role": "Analyze user stories and create technical specifications",
+          "phases": 6,
+          "output": "Implementation specification document",
+          "timeout": "20 minutes"
+        },
+        {
+          "name": "PySpark Engineer",
+          "role": "Generate production-ready PySpark ETL code",
+          "phases": 8,
+          "output": "Python file with transformations",
+          "timeout": "30 minutes"
+        }
+      ]
+    },
+    "mcp_tools": {
+      "count": 5,
+      "server": "ba_pyspark_memory",
+      "tools": [
+        {
+          "name": "read_etl_template",
+          "description": "Returns ETL template content"
+        },
+        {
+          "name": "read_business_analysis",
+          "description": "Reads BA documentation for a table"
+        },
+        {
+          "name": "write_memory",
+          "description": "Stores/updates table memory with smart merge"
+        },
+        {
+          "name": "read_memory",
+          "description": "Reads current consolidated table state"
+        },
+        {
+          "name": "list_memories",
+          "description": "Lists all memory files"
+        }
+      ]
+    },
+    "data_dictionary": {
+      "total_tables": 69,
+      "total_files": 72,
+      "size": "300 KB",
+      "sources": {
+        "cms": {
+          "tables": 43,
+          "description": "ORS (Offender Recording System) tables"
+        },
+        "fvms": {
+          "tables": 26,
+          "description": "Family Violence Management System tables"
+        }
+      },
+      "format": "Markdown with schema definitions, keys, and business rules"
+    }
+  },
+  "cli_entrypoints": {
+    "multi-agent-scaffold": {
+      "description": "Main workflow orchestrator for BA and PySpark agents",
+      "usage": "multi-agent-scaffold --user-story ID --file-name NAME --read-layer LAYER --write-layer LAYER",
+      "options": [
+        "--user-story: Azure DevOps work item ID",
+        "--file-name: Target Python file name",
+        "--read-layer: Source data layer (bronze/silver/gold)",
+        "--write-layer: Target data layer (bronze/silver/gold)",
+        "--skip-auth: Skip Azure authentication check",
+        "--skip-business-analyst: Skip BA agent, use existing docs"
+      ]
+    },
+    "multi-agent-mcp": {
+      "description": "MCP server for memory management",
+      "usage": "multi-agent-mcp",
+      "server_name": "ba_pyspark_memory",
+      "version": "2.0.0"
+    }
+  },
+  "testing": {
+    "framework": "pytest",
+    "test_files": 8,
+    "test_count": 149,
+    "coverage_modules": [
+      "config (25 tests)",
+      "orchestrator (22 tests)",
+      "memory (35 tests)",
+      "prompts (39 tests)",
+      "auth (23 tests)",
+      "mcp_tools (5 tests)"
+    ],
+    "mocking": "Comprehensive mocking of Azure CLI, Claude CLI, and file operations"
+  },
+  "installation": {
+    "steps": [
+      "Clone repository: git clone https://github.com/linus-mcmanamey/multi-agent-user-story-development.git",
+      "Navigate to directory: cd multi-agent-user-story-development",
+      "Install dependencies: pip install -e '.[all]'",
+      "Copy environment template: cp .env.template .env",
+      "Configure .env with Azure credentials",
+      "Verify installation: multi-agent-scaffold --help"
+    ],
+    "dependencies": {
+      "required": [
+        "anthropic>=0.7.0",
+        "pydantic>=2.0.0",
+        "python-dotenv>=1.0.0",
+        "pyyaml>=6.0",
+        "requests>=2.31.0",
+        "loguru>=0.7.0",
+        "azure-devops>=7.0.0",
+        "azure-identity>=1.13.0",
+        "azure-storage-blob>=12.17.0",
+        "azure-keyvault-secrets>=4.7.0",
+        "mcp>=0.1.0"
+      ],
+      "optional": {
+        "pyspark": ["pyspark>=3.4.0"],
+        "dev": ["pytest>=7.0.0", "pytest-cov>=4.0.0", "ruff>=0.1.0", "black>=23.0.0", "mypy>=1.0.0"]
+      }
+    }
+  },
+  "changelog": {
+    "1.0.0": {
+      "date": "2024-11-14",
+      "changes": [
+        "Initial release",
+        "Migrated scaffolding from Unify project",
+        "Business Analyst agent with 6 execution phases",
+        "PySpark Engineer agent with 8 execution phases",
+        "Memory management system with smart merge",
+        "Data dictionary support (69 tables)",
+        "10 Claude Code skills",
+        "6 intelligent hooks",
+        "Custom MCP server (5 tools)",
+        "Comprehensive test suite (149 tests)",
+        "Full packaging and documentation"
+      ]
+    }
+  }
+}
