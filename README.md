@@ -59,14 +59,14 @@ This plugin automates the end-to-end development of data transformation pipeline
 ```bash
 # Create a new analytics table from silver layer sources
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name g_xa_mg_cms_mo \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold
 ```
 
 **What Happens:**
-1. Business Analyst retrieves US:44687, analyzes requirements
+1. Business Analyst retrieves US:<user_story_id>, analyzes requirements
 2. Queries schemas for silver CMS tables and gold target
 3. Generates technical spec with column mappings and transformations
 4. PySpark Engineer creates new Python file with ETL class
@@ -76,8 +76,8 @@ python -m multi_agent_user_story_development.orchestrator \
 ```bash
 # Add new transformation to existing silver table
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 45123 \
-  --file-name s_cms_case \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer bronze \
   --write-layer silver \
   --skip-business-analyst  # Reuse existing documentation
@@ -94,8 +94,8 @@ python -m multi_agent_user_story_development.orchestrator \
 ```bash
 # Create linkage between CMS and FVMS systems
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 46001 \
-  --file-name g_mg_occurrence_linkage \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold
 ```
@@ -315,8 +315,8 @@ Memory Update (Memory MCP)
 ```bash
 # Run the orchestrator with a user story
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name g_xa_mg_cms_mo \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold
 ```
@@ -350,7 +350,7 @@ After successful execution, you'll find:
 - Business rules and transformations
 - Related tables and gotchas
 
-**History Snapshot** (`.claude/memory/gold/cms/mg_cms_mo/history/US_44687.md`):
+**History Snapshot** (`.claude/memory/gold/cms/mg_cms_mo/history/US_<user_story_id>.md`):
 - Point-in-time snapshot before this user story
 - Useful for understanding requirement evolution
 
@@ -441,8 +441,8 @@ az devops configure --defaults organization=https://dev.azure.com/emstas
 **Skip authentication check** (for testing):
 ```bash
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name test_table \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold \
   --skip-auth
@@ -455,8 +455,8 @@ python -m multi_agent_user_story_development.orchestrator \
 #### Basic Execution
 ```bash
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name g_xa_mg_cms_mo \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold
 ```
@@ -465,8 +465,8 @@ python -m multi_agent_user_story_development.orchestrator \
 ```bash
 # If documentation already exists, skip BA and run only PySpark Engineer
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name g_xa_mg_cms_mo \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold \
   --skip-business-analyst
@@ -476,8 +476,8 @@ python -m multi_agent_user_story_development.orchestrator \
 ```bash
 # Enable debug-level logging
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name g_xa_mg_cms_mo \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold \
   --verbose
@@ -487,8 +487,8 @@ python -m multi_agent_user_story_development.orchestrator \
 ```bash
 # For testing without Azure authentication
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name test_table \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer bronze \
   --write-layer silver \
   --skip-auth
@@ -526,8 +526,8 @@ else:
 ```bash
 # Step 1: Create technical specs and implementation
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 45001 \
-  --file-name g_mg_incident_summary \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold
 
@@ -543,8 +543,8 @@ python python_files/gold/g_mg_incident_summary.py
 ```bash
 # Step 1: Run with existing documentation
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 45123 \
-  --file-name s_cms_case \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer bronze \
   --write-layer silver \
   --skip-business-analyst
@@ -560,8 +560,8 @@ cat .claude/memory/silver/cms/cms_case.md
 ```bash
 # Step 1: Generate linkage table
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 46001 \
-  --file-name g_mg_occurrence_linkage \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold
 
@@ -716,8 +716,8 @@ for story in user_stories:
 │   │   ├── mg_case.md                    # Current consolidated state
 │   │   └── mg_case/
 │   │       └── history/
-│   │           ├── US_44687.md           # Snapshot before US:44687
-│   │           └── US_45123.md           # Snapshot before US:45123
+│   │           ├── US_<user_story_id>.md           # Snapshot before US:<user_story_id>
+│   │           └── US_<user_story_id>.md           # Snapshot before US:<user_story_id>
 │   └── fvms/
 │       └── incident.md
 └── silver/
@@ -917,8 +917,8 @@ az devops configure --defaults organization=https://dev.azure.com/emstas
 Or skip authentication for testing:
 ```bash
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name test_table \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold \
   --skip-auth
@@ -947,8 +947,8 @@ ls -la .claude/documentation/
 
 # Run BA agent first (without skip)
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name g_xa_mg_cms_mo \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold
 # (Do NOT use --skip-business-analyst on first run)
@@ -1011,8 +1011,8 @@ export LOG_LEVEL=DEBUG
 
 # Run with verbose flag
 python -m multi_agent_user_story_development.orchestrator \
-  --user-story 44687 \
-  --file-name test_table \
+  --user-story <user_story_id> \
+  --file-name <insert_file_name> \
   --read-layer silver \
   --write-layer gold \
   --verbose
