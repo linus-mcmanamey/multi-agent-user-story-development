@@ -248,7 +248,7 @@ Memory Update (Memory MCP)
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/emstas/multi-agent-user-story-development.git
+   git clone https://github.com/<your_organization>/multi-agent-user-story-development.git
    cd multi-agent-user-story-development
    ```
 
@@ -290,8 +290,8 @@ Memory Update (Memory MCP)
    ```bash
    # Azure DevOps
    AZURE_DEVOPS_PAT=your_personal_access_token
-   AZURE_DEVOPS_ORGANIZATION=emstas
-   AZURE_DEVOPS_PROJECT=Program Unify
+   AZURE_DEVOPS_ORGANIZATION=<your_organization>
+   AZURE_DEVOPS_PROJECT=<Your Project Name>
 
    # Claude API
    CLAUDE_API_KEY=your_claude_api_key
@@ -361,8 +361,8 @@ After successful execution, you'll find:
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `AZURE_DEVOPS_PAT` | Yes | - | Personal Access Token for Azure DevOps API |
-| `AZURE_DEVOPS_ORGANIZATION` | Yes | `emstas` | Azure DevOps organization name |
-| `AZURE_DEVOPS_PROJECT` | Yes | `Program Unify` | Project name in Azure DevOps |
+| `AZURE_DEVOPS_ORGANIZATION` | Yes | `<your_organization>` | Azure DevOps organization name |
+| `AZURE_DEVOPS_PROJECT` | Yes | `<Your Project Name>` | Project name in Azure DevOps |
 | `CLAUDE_API_KEY` | Yes | - | API key from Anthropic console |
 | `CLAUDE_MODEL` | No | `claude-opus-4-1-20250805` | Claude model to use for agents |
 | `SYNAPSE_WORKSPACE` | No | - | Azure Synapse workspace name (for schema validation) |
@@ -435,7 +435,7 @@ az login
 az account show
 
 # Set Azure DevOps organization (if needed)
-az devops configure --defaults organization=https://dev.azure.com/emstas
+az devops configure --defaults organization=https://dev.azure.com/<your_organization>
 ```
 
 **Skip authentication check** (for testing):
@@ -773,7 +773,7 @@ Available skills for deep knowledge:
 
 1. **Clone and install**
    ```bash
-   git clone https://github.com/emstas/multi-agent-user-story-development.git
+   git clone https://github.com/<your_organization>/multi-agent-user-story-development.git
    cd multi-agent-user-story-development
    python -m venv venv
    source venv/bin/activate
@@ -911,7 +911,7 @@ Error: Azure authentication required
 ```bash
 az login
 az account show  # Verify authentication
-az devops configure --defaults organization=https://dev.azure.com/emstas
+az devops configure --defaults organization=https://dev.azure.com/<your_organization>
 ```
 
 Or skip authentication for testing:
@@ -1052,7 +1052,7 @@ tail -f ~/.claude/hook_logs/orchestrator_hook.log
 
 MIT License
 
-Copyright (c) 2024 Program Unify
+Copyright (c) 2024 <Your Project Name>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1074,7 +1074,7 @@ SOFTWARE.
 
 ## Acknowledgments
 
-This plugin was developed as part of the **Program Unify** data migration project to Azure Synapse Analytics.
+This plugin was developed as part of the **<Your Project Name>** data migration project to Azure Synapse Analytics.
 
 **Built With:**
 - [Claude Code](https://claude.ai/claude-code) - Anthropic's official CLI for Claude
@@ -1089,7 +1089,7 @@ This plugin was developed as part of the **Program Unify** data migration projec
 - Claude Code Plugin System - MCP integration and skill framework
 
 **Contributors:**
-- Program Unify Team
+- <Your Project Name> Team
 - Azure Migration Engineering
 
 **Special Thanks:**
@@ -1100,9 +1100,9 @@ This plugin was developed as part of the **Program Unify** data migration projec
 ---
 
 **Project Links:**
-- [GitHub Repository](https://github.com/emstas/multi-agent-user-story-development)
-- [Issue Tracker](https://github.com/emstas/multi-agent-user-story-development/issues)
-- [Azure DevOps Project](https://dev.azure.com/emstas/Program%20Unify)
+- [GitHub Repository](https://github.com/<your_organization>/multi-agent-user-story-development)
+- [Issue Tracker](https://github.com/<your_organization>/multi-agent-user-story-development/issues)
+- [Azure DevOps Project](https://dev.azure.com/<your_organization>/<Your%20Project%20Name>)
 
 **Documentation:**
 - [Claude Code Documentation](https://claude.ai/claude-code/docs)
