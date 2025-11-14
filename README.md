@@ -291,7 +291,7 @@ Memory Update (Memory MCP)
    # Azure DevOps
    AZURE_DEVOPS_PAT=your_personal_access_token
    AZURE_DEVOPS_ORGANIZATION=<your_organization>
-   AZURE_DEVOPS_PROJECT=<Your Project Name>
+   AZURE_DEVOPS_PROJECT=<your_project_name>
 
    # Claude API
    CLAUDE_API_KEY=your_claude_api_key
@@ -332,25 +332,25 @@ python -m multi_agent_user_story_development.orchestrator \
 
 After successful execution, you'll find:
 
-**Documentation** (`.claude/documentation/g_xa_mg_<datasource>_mo_implementation_specs.md`):
+**Documentation** (`.claude/documentation/<datasource>_implementation_specs.md`):
 - Executive summary of requirements
 - Schema mappings (source → target)
 - Transformation specifications
 - Testing scenarios
 
-**Python Code** (`python_files/gold/g_xa_mg_<datasource>_mo.py`):
+**Python Code** (`python_files/gold/<datasource>.py`):
 - Complete ETL class with extract/transform/load
 - Transformation functions with US references
 - Type hints and error handlers
 - Follows project coding standards
 
-**Memory** (`.claude/memory/gold/<datasource>/mg_<datasource>_mo.md`):
+**Memory** (`.claude/memory/gold/<datasource>/<datasource>.md`):
 - Consolidated table context
 - Changelog of user stories
 - Business rules and transformations
 - Related tables and gotchas
 
-**History Snapshot** (`.claude/memory/gold/<datasource>/mg_<datasource>_mo/history/US_<user_story_id>.md`):
+**History Snapshot** (`.claude/memory/gold/<datasource>/<datasource>_mo/history/US_<user_story_id>.md`):
 - Point-in-time snapshot before this user story
 - Useful for understanding requirement evolution
 
@@ -362,7 +362,7 @@ After successful execution, you'll find:
 |----------|----------|---------|-------------|
 | `AZURE_DEVOPS_PAT` | Yes | - | Personal Access Token for Azure DevOps API |
 | `AZURE_DEVOPS_ORGANIZATION` | Yes | `<your_organization>` | Azure DevOps organization name |
-| `AZURE_DEVOPS_PROJECT` | Yes | `<Your Project Name>` | Project name in Azure DevOps |
+| `AZURE_DEVOPS_PROJECT` | Yes | `<your_project_name>` | Project name in Azure DevOps |
 | `CLAUDE_API_KEY` | Yes | - | API key from Anthropic console |
 | `CLAUDE_MODEL` | No | `claude-opus-4-1-20250805` | Claude model to use for agents |
 | `SYNAPSE_WORKSPACE` | No | - | Azure Synapse workspace name (for schema validation) |
@@ -592,7 +592,7 @@ if memory_path.exists():
     print(content)
 
 # List memory history for a table
-history = config.list_memory_history(layer="gold", datasource="<datasource>", table_name="mg_table")
+history = config.list_memory_history(layer="gold", datasource="<your_datasource>", table_name="your_table_name")
 for hist in history:
     print(f"User Story: {hist.stem}, Path: {hist}")
 ```
