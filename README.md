@@ -322,7 +322,7 @@ python -m multi_agent_user_story_development.orchestrator \
 ```
 
 **What this does:**
-1. Retrieves Azure DevOps user story 44687
+1. Retrieves Azure DevOps user story <user_story_id>
 2. Analyzes requirements for a gold layer table
 3. Generates technical specifications in `.claude/documentation/`
 4. Implements PySpark code in `python_files/gold/`
@@ -505,8 +505,8 @@ config = AgentConfig()
 
 # Run orchestrator programmatically
 exit_code = run_orchestrator(
-    user_story="44687",
-    file_name="g_xa_mg_<datasource>_mo",
+    user_story="<user_story_id>",
+    file_name="<insert_file_name>",
     read_layer="silver",
     write_layer="gold",
     skip_auth=False,
@@ -532,11 +532,11 @@ python -m multi_agent_user_story_development.orchestrator \
   --write-layer gold
 
 # Step 2: Review generated files
-cat .claude/documentation/g_mg_incident_summary_implementation_specs.md
-cat python_files/gold/g_mg_incident_summary.py
+cat .claude/documentation/<insert_file_name>_implementation_specs.md
+cat python_files/gold/<insert_file_name>.py
 
 # Step 3: Test implementation
-python python_files/gold/g_mg_incident_summary.py
+python python_files/gold/<insert_file_name>.py
 ```
 
 #### Workflow 2: Update Existing Silver Table
@@ -566,10 +566,10 @@ python -m multi_agent_user_story_development.orchestrator \
   --write-layer gold
 
 # Step 2: Verify linkage pattern
-grep -A 20 "full_outer" python_files/gold/g_mg_occurrence_linkage.py
+grep -A 20 "full_outer" python_files/gold/<insert_file_name>.py
 
 # Step 3: Test linkage query
-python python_files/gold/g_mg_occurrence_linkage.py
+python python_files/gold/<insert_file_name>.py
 ```
 
 ### Advanced Usage Patterns
@@ -602,9 +602,9 @@ for hist in history:
 import subprocess
 
 user_stories = [
-    {"us": "45001", "file": "g_mg_incident_summary", "read": "silver", "write": "gold"},
-    {"us": "45002", "file": "g_mg_table_summary", "read": "silver", "write": "gold"},
-    {"us": "45003", "file": "g_mg_occurrence_stats", "read": "silver", "write": "gold"},
+    {"us": "<user_story_id_1>", "file": "<insert_file_name_1>", "read": "silver", "write": "gold"},
+    {"us": "<user_story_id_2>", "file": "<insert_file_name_2>", "read": "silver", "write": "gold"},
+    {"us": "<user_story_id_3>", "file": "<insert_file_name_3>", "read": "silver", "write": "gold"},
 ]
 
 for story in user_stories:
@@ -1039,7 +1039,7 @@ logger.debug("Detailed debug information")
 **Log Format:**
 ```
 2025-11-14 10:30:45 | INFO     | Orchestrator - Starting automated agent workflow
-2025-11-14 10:30:46 | INFO     | Orchestrator - User Story: 44687
+2025-11-14 10:30:46 | INFO     | Orchestrator - User Story: <user_story_id>
 2025-11-14 10:30:47 | SUCCESS  | Orchestrator - Business analyst agent completed successfully
 ```
 
