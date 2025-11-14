@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi-agent-user-story-development"
+version = "0.1.0"
+description = "Claude Code plugin for multi-agent ETL development from user stories"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Program Unify", email = "unify@emstas.com"}
+]
+keywords = ["claude", "pyspark", "etl", "azure", "devops", "multi-agent"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "anthropic>=0.7.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0",
+    "requests>=2.31.0",
+    "azure-devops>=7.0.0",
+    "azure-identity>=1.13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+]
+mcp = [
+    "mcp>=0.1.0",
+]
+
+[project.urls]
+Repository = "https://github.com/emstas/multi-agent-user-story-development"
+Issues = "https://github.com/emstas/multi-agent-user-story-development/issues"
+
+[tool.setuptools]
+packages = ["multi_agent_user_story_development"]
+
+[tool.ruff]
+line-length = 240
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.black]
+line-length = 240
+target-version = ["py310"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
