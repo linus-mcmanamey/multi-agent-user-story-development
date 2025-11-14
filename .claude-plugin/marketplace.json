@@ -1,0 +1,42 @@
+{
+  "name": "multi-agent-user-story-development-marketplace",
+  "metadata": {
+    "description": "Automated multi-agent orchestration system for generating PySpark ETL code from Azure DevOps user stories with memory persistence and dual schema validation.",
+    "version": "1.0.0",
+    "pluginRoot": "."
+  },
+  "owner": {
+    "name": "Linus McMananey",
+    "email": "linus.mcmanamey@gmail.com",
+    "url": "https://github.com/linus-mcmanamey"
+  },
+  "plugins": [
+    {
+      "name": "multi-agent-user-story-development",
+      "source": "./",
+      "description": "Automated multi-agent orchestration system for generating PySpark ETL code from Azure DevOps user stories. Coordinates Business Analyst and PySpark Engineer agents with memory persistence, dual schema validation, and Azure integration.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Linus McMananey",
+        "email": "linus.mcmanamey@gmail.com"
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/linus-mcmanamey/multi-agent-user-story-development",
+      "repository": "https://github.com/linus-mcmanamey/multi-agent-user-story-development.git",
+      "keywords": [
+        "multi-agent",
+        "orchestration",
+        "user-story",
+        "pyspark",
+        "etl",
+        "azure-devops",
+        "code-generation",
+        "business-analyst",
+        "automation",
+        "mcp",
+        "memory-management",
+        "schema-validation"
+      ]
+    }
+  ]
+}
