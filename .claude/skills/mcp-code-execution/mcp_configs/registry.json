@@ -1,0 +1,33 @@
+{
+  "servers": {
+    "ado": {
+      "name": "Azure DevOps MCP",
+      "description": "Work items, pull requests, pipelines, repositories, and wiki management",
+      "command": "npx",
+      "args": ["-y", "@azure-devops/mcp", "emstas", "--authentication", "env"],
+      "env": {
+        "AZURE_DEVOPS_PAT": "${AZURE_DEVOPS_PAT}",
+        "AZURE_DEVOPS_PROJECT": "${AZURE_DEVOPS_PROJECT}"
+      },
+      "config_file": "${PROJECT_ROOT}/.claude/mcp/.mcp.json_ado"
+    },
+    "mcp-server-motherduck": {
+      "name": "Motherduck MCP",
+      "description": "use to view data in warehouse.duckdb",
+      "command": "uvx",
+      "args": [
+        "mcp-server-motherduck",
+        "--",
+        "--db-path",
+        "/workspaces/data/warehouse.duckdb",
+        "--read-only"
+      ]
+    },
+    "Ref": {
+      "name": "Ref MCP",
+      "description": "use to access Ref API",
+      "transport": "http",
+      "url": "https://api.ref.tools/mcp?apiKey=ref-40e54e07e3ea2a7f36b9"
+    }
+  }
+}

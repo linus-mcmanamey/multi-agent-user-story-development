@@ -1,0 +1,1 @@
+wiki-auto-documenter/skill.md

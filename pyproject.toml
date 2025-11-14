@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multi-agent-user-story-development"
-version = "0.1.0"
+version = "1.0.0"
 description = "Claude Code plugin for multi-agent ETL development from user stories"
 readme = "README.md"
 license = {text = "MIT"}
@@ -12,15 +12,17 @@ requires-python = ">=3.10"
 authors = [
     {name = "Program Unify", email = "unify@emstas.com"}
 ]
-keywords = ["claude", "pyspark", "etl", "azure", "devops", "multi-agent"]
+keywords = ["claude", "pyspark", "etl", "azure", "devops", "multi-agent", "orchestration", "user-stories"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 dependencies = [
@@ -29,11 +31,18 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "pyyaml>=6.0",
     "requests>=2.31.0",
+    "loguru>=0.7.0",
     "azure-devops>=7.0.0",
     "azure-identity>=1.13.0",
+    "azure-storage-blob>=12.17.0",
+    "azure-keyvault-secrets>=4.7.0",
+    "mcp>=0.1.0",
 ]
 
 [project.optional-dependencies]
+pyspark = [
+    "pyspark>=3.4.0",
+]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
@@ -41,16 +50,29 @@ dev = [
     "black>=23.0.0",
     "mypy>=1.0.0",
 ]
-mcp = [
-    "mcp>=0.1.0",
+all = [
+    "pyspark>=3.4.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
 ]
+
+[project.scripts]
+multi-agent-scaffold = "multi_agent_user_story_development.orchestrator:main"
+multi-agent-mcp = "multi_agent_user_story_development.mcp.server:main"
 
 [project.urls]
 Repository = "https://github.com/emstas/multi-agent-user-story-development"
 Issues = "https://github.com/emstas/multi-agent-user-story-development/issues"
+Documentation = "https://github.com/emstas/multi-agent-user-story-development/blob/main/README.md"
 
 [tool.setuptools]
 packages = ["multi_agent_user_story_development"]
+
+[tool.setuptools.package-data]
+multi_agent_user_story_development = ["templates/*.md", "prompts/*.py"]
 
 [tool.ruff]
 line-length = 240
@@ -58,6 +80,7 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
+ignore = ["E501"]
 
 [tool.black]
 line-length = 240
@@ -67,3 +90,11 @@ target-version = ["py310"]
 python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=multi_agent_user_story_development --cov-report=term-missing"

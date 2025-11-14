@@ -1,0 +1,80 @@
+{
+  "servers": {
+    "google_drive": {
+      "tools": [
+        {
+          "name": "get_document",
+          "description": "Retrieve a document from Google Drive",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "document_id": {
+                "type": "string",
+                "description": "The ID of the document to retrieve"
+              },
+              "fields": {
+                "type": "string",
+                "description": "Specific fields to return (optional)"
+              }
+            },
+            "required": ["document_id"]
+          }
+        },
+        {
+          "name": "get_sheet",
+          "description": "Retrieve a spreadsheet from Google Drive",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "sheet_id": {
+                "type": "string",
+                "description": "The ID of the sheet to retrieve"
+              }
+            },
+            "required": ["sheet_id"]
+          }
+        }
+      ]
+    },
+    "salesforce": {
+      "tools": [
+        {
+          "name": "query",
+          "description": "Query Salesforce records using SOQL",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string",
+                "description": "SOQL query string"
+              }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "update_record",
+          "description": "Update a Salesforce record",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "object_type": {
+                "type": "string",
+                "description": "Type of Salesforce object (Lead, Contact, Account, etc.)"
+              },
+              "record_id": {
+                "type": "string",
+                "description": "The ID of the record to update"
+              },
+              "data": {
+                "type": "object",
+                "description": "Fields to update with their new values"
+              }
+            },
+            "required": ["object_type", "record_id", "data"]
+          }
+        }
+      ]
+    }
+  }
+}

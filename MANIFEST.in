@@ -1,0 +1,36 @@
+# Include documentation files
+include README.md
+include LICENSE
+include .env.template
+
+# Include configuration files
+include pyproject.toml
+include setup.py
+include requirements.txt
+
+# Include .claude directory and all its contents
+recursive-include .claude *.md
+recursive-include .claude *.json
+recursive-include .claude *.txt
+graft .claude/commands
+graft .claude/hooks
+graft .claude/memory
+graft .claude/skills
+
+# Include templates and prompts
+recursive-include multi_agent_user_story_development/templates *.md
+recursive-include multi_agent_user_story_development/prompts *.py
+
+# Include package metadata
+include multi_agent_user_story_development/py.typed
+
+# Exclude development and test files
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .DS_Store
+global-exclude *.so
+global-exclude .git*
+exclude .gitignore
+recursive-exclude tests *
+recursive-exclude .vscode *
+recursive-exclude .idea *

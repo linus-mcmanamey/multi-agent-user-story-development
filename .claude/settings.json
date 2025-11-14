@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "includeCoAuthoredBy": false,
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "alwaysThinkingEnabled": false,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754879256950
+  },
+  "autoApprove": [
+    "Bash:*",
+    "Read:*",
+    "Write:*",
+    "Edit:*",
+    "Glob:*",
+    "Grep:*",
+    "Task:*",
+    "TodoWrite:*",
+    "WebFetch:*",
+    "WebSearch:*",
+    "SlashCommand:*",
+    "NotebookEdit:*",
+    "mcp__*"
+  ],
+  "hooks": {
+    "user-prompt-submit": ".claude/hooks/combined-prompt-hook.sh"
+  },
+  "enabledPlugins": {}
+}

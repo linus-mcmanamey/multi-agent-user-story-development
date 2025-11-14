@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "skills": {
+    "pyspark-patterns": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["pyspark", "spark", "dataframe", "tableutils", "tableUtilities"],
+        "intentPatterns": ["write.*pyspark", "create.*etl", "transform.*data"]
+      }
+    },
+    "schema-reference": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "critical",
+      "promptTriggers": {
+        "keywords": ["schema", "column", "table structure", "data type"],
+        "intentPatterns": ["validate.*schema", "check.*columns", "what.*fields"]
+      }
+    },
+    "project-architecture": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "promptTriggers": {
+        "keywords": ["architecture", "medallion", "bronze", "silver", "gold", "pipeline"],
+        "intentPatterns": ["how.*work", "explain.*architecture", "understand.*flow"]
+      }
+    }
+  }
+}

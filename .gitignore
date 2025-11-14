@@ -47,6 +47,14 @@ env/
 !.claude/memory/data_dictionary
 .claude/memory/data_dictionary/*
 !.claude/memory/data_dictionary/.gitkeep
+.claude/settings.local.json
+.claude/hook_logs/
+.claude/debug/
+.claude/file-history/
+.claude/history.jsonl
+.claude/shell-snapshots/
+.claude/todos/
+.claude/session-env/
 
 # Databases
 *.duckdb
